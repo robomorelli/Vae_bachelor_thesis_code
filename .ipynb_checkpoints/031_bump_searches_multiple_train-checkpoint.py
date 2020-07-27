@@ -724,13 +724,13 @@ if __name__ == "__main__":
 
     components_dict = {
         'met':10,
-        'mt':20,
-        'mbb':1,
-        'mct2':20,
-        'mlb1':1,
-        'lep1Pt':1,
-        'nJet30':1,
-        'nBJet30_MV2c10':1
+        'mt':5,
+        'mbb':0,
+        'mct2':5,
+        'mlb1':0,
+        'lep1Pt':0,
+        'nJet30':0,
+        'nBJet30_MV2c10':0
         }
 
     selected_components = []
@@ -745,11 +745,24 @@ if __name__ == "__main__":
         weights.append(v)
 
     selected_idx = [cols.index(component) for component in selected_components]
+    
+#     Only for variables exclusion
+#     Nf_lognorm=0
+#     Nf_PDgauss=0
+#     for selected in selected_components:
+#         if selected in cols[:-2]:
+#             Nf_lognorm += 1
+#         else:
+#             Nf_PDgauss += 1
+        
+#     original_dim = Nf_lognorm + Nf_PDgauss
 
-    original_dim = 8
-    latent_dim = 3
     Nf_lognorm = 6
     Nf_PDgauss = 2
+    original_dim = Nf_lognorm + Nf_PDgauss
+    latent_dim = 3
+    
+    print("\x1b[31m\" lognorm {}, pdgauss {}: original dim {}""\x1b[31m".format(Nf_lognorm, Nf_PDgauss, original_dim))
     #################### WEIGHTS Definistion ###############################
 
     if 0 in weights:
