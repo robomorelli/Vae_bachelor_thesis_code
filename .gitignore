@@ -3,4 +3,4 @@
 *.h5
 *.hdf5
 *.pdf
-path_to_your_folder/
+model_results/
