@@ -556,7 +556,7 @@ def train_vae(name,name_fold, name_weights , dictionary, w, ind_w, intermediate_
                                            )(h1_prior)
         L_prior_sigma = Lambda(InverseSquareRootLinearUnit, name='L_prior_sigma')(L_prior_sigma_preActivation)
 
-        params = KL.concatenate([T_z_mean, T_z_sigma, L_prior_mean, L_prior_sigma, L_par1, L_par2, L_par3], axis=1)
+#         params = KL.concatenate([T_z_mean, T_z_sigma, L_prior_mean, L_prior_sigma, L_par1, L_par2, L_par3], axis=1)
 
         L_RecoProb_1 = CustomIndividualLogNorLayer_1(name='RecoNLL_met')([x_DNN_input,L_par1,
                                                                       L_par2,L_par3])
@@ -723,10 +723,10 @@ if __name__ == "__main__":
             ]
 
     components_dict = {
-        'met':10,
-        'mt':5,
+        'met':5,
+        'mt':10,
         'mbb':0,
-        'mct2':5,
+        'mct2':10,
         'mlb1':0,
         'lep1Pt':0,
         'nJet30':0,
