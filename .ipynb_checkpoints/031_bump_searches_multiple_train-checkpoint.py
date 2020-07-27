@@ -496,10 +496,10 @@ def train_vae(name,name_fold, name_weights , dictionary, w, ind_w, intermediate_
 
         # The below is necessary for starting Numpy generated random numbers
         # in a well-defined initial state.
-        np.random.seed(42)
+        np.random.seed(42*num_model)
         # The below is necessary for starting core Python generated random numbers
         # in a well-defined state.
-        rn.seed(12345)
+        rn.seed(12345*num_model)
 
         x_DNN_input = Input(shape=(original_dim,), name='Input')
         hidden_1 = Dense(intermediate_dim, activation=act_fun, name='Encoder_h1')
