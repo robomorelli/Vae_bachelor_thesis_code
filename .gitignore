@@ -1,2 +1,4 @@
 *.npy
 *.root
+*.h5
+*.hdf5
