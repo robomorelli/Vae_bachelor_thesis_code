@@ -689,7 +689,7 @@ if __name__ == "__main__":
 
     cols_sel = ['met','mt','mct2']
 
-    name_exp = '{}_{}_feats_scan_w'.format(dataset, len(cols))
+    name_exp = '{}_{}_feats_scan_w'.format(dataset, len(cols_sel))
 
     # TO DO:
     # Add lep1Pt feature
