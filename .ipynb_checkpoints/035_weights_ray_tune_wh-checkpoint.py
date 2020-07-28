@@ -687,7 +687,7 @@ if __name__ == "__main__":
              'lep1Pt', 'nJet30','nBJet30_MV2c10'
              ]
 
-    cols = ['met','mt','mct2']
+    cols_sel = ['met','mt','mct2']
 
     name_exp = '{}_{}_feats_scan_w'.format(dataset, len(cols))
 
@@ -720,10 +720,18 @@ if __name__ == "__main__":
 #         val_df = val_df[((val_df['lep1Pt']>=0)&(val_df['lep1Pt']<1000))]
 
         val = val_df[cols_sel].values
+    
+    Nf_lognorm=0
+    Nf_PDgauss=0
+    for var in cols_sel:
+        if var in cols_or[:-2]:
+            Nf_lognorm += 1
+        else:
+            Nf_PDgauss += 1
 
-    original_dim = 3
-    Nf_lognorm = 3
-    Nf_PDgauss = 0
+    print('lognorm {} and pdgauss {}'.format(Nf_lognorm,Nf_PDgauss))
+
+    original_dim = len(cols_sel)
 
 
     main(name_exp = name_exp , overwrite_exp=True)

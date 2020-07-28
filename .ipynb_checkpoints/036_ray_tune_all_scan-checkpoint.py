@@ -447,14 +447,14 @@ def train_vae(config, reporter):
             return IndividualRecoProb_forVAE_lognorm_3(x, par1, par2, par3, w = w[2])
 
 
-    class CustomIndividualLogNorLayer_4(Layer):
-        def __init__(self, **kwargs):
-            self.is_placeholder = True
-            super(CustomIndividualLogNorLayer_4, self).__init__(**kwargs)
+#     class CustomIndividualLogNorLayer_4(Layer):
+#         def __init__(self, **kwargs):
+#             self.is_placeholder = True
+#             super(CustomIndividualLogNorLayer_4, self).__init__(**kwargs)
 
-        def call(self, inputs):
-            x, par1, par2, par3 = inputs
-            return IndividualRecoProb_forVAE_lognorm_4(x, par1, par2, par3, w = w[3])
+#         def call(self, inputs):
+#             x, par1, par2, par3 = inputs
+#             return IndividualRecoProb_forVAE_lognorm_4(x, par1, par2, par3, w = w[3])
 
 
 
@@ -692,9 +692,9 @@ def main(name_exp = 'exp', overwrite_exp=True):
 #              "mean_accuracy": 0.99,
 #             "training_iteration": 5 if args.smoke_test else 300
 #         },
-        num_samples=50,
+        num_samples=4,
         resources_per_trial={
-            "gpu": 1,
+            "gpu": 0,
             "cpu":8
         },
 
@@ -707,7 +707,7 @@ def main(name_exp = 'exp', overwrite_exp=True):
             #"optimizer": tune.sample_from(lambda spec: random.choice(['adadelta'])),
             "epochs": epochs,
             "weight_KL_loss": tune.sample_from(lambda spec: random.choice([0.4,0.6,0.8])),
-            "batch_size": tune.sample_from(lambda spec: random.choice([100,200,500,1000])),
+            "batch_size": tune.sample_from(lambda spec: random.choice([200])),
             'met': tune.sample_from(lambda spec: random.choice([1,2,5,10,20])),
             'mt': tune.sample_from(lambda spec: random.choice([1,2,5,10,20])),
             'mct2': tune.sample_from(lambda spec: random.choice([1,2,5,10,20])),
@@ -769,7 +769,7 @@ if __name__ == "__main__":
     
     Nf_lognorm=0
     Nf_PDgauss=0
-    for var in cols:
+    for var in cols_sel:
         if var in cols_or[:-2]:
             Nf_lognorm += 1
         else:
@@ -777,6 +777,6 @@ if __name__ == "__main__":
 
     print('lognorm {} and pdgauss {}'.format(Nf_lognorm,Nf_PDgauss))
 
-    original_dim = len(cols)
+    original_dim = len(cols_sel)
 
     main(name_exp = name_exp , overwrite_exp=True)
