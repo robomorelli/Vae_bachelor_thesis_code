@@ -3,4 +3,5 @@
 *.h5
 *.hdf5
 *.pdf
+*.csv
 model_results/
